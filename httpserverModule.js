@@ -1,4 +1,5 @@
 const http = require("http");
+const fs = require("fs");
 
 const port = process.env.PORT || 3000;
 
@@ -15,6 +16,10 @@ const server = http.createServer((request, response) => {
     response.end(
       "<h2>About Fitness</h2><p>And this is the to about node js learnings notes</p>"
     );
+  } else if (request.url == "/main") {
+    response.statusCode = 200;
+    const data = fs.readFileSync("index.html");
+    response.end(data.toString());
   } else {
     response.statusCode = 404;
     response.end("<h4>Page is Not found</h4>");
